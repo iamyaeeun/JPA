@@ -18,8 +18,10 @@ public class JpaMain {
 
         try{
             //영속
-            Member member = em.find(Member.class, 150L);
-            member.setName("ZZZZZ"); //변경 감지(Dirty Checking)
+            Member member=new Member(200L,"member200");
+            em.persist(member);
+
+            em.flush(); //flush는 영속성 컨텍스트의 변경내용을 DB에 동기화(트랜잭션 commit 시 flush 자동 호출됨)
 
             System.out.println("===============");
 
