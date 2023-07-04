@@ -17,15 +17,11 @@ public class JpaMain {
         tx.begin();
 
         try{
-            //비영속
-            Member member=new Member();
-            member.setId(100L);
-            member.setName("HelloJPA");
-
             //영속
-            System.out.println("=== BEFORE ===");
-            em.persist(member); //EntityManager 안에 있는 영속성 컨텍스트에 member(엔티티) 저장됨
-            System.out.println("=== AFTER ===");
+            Member member = em.find(Member.class, 150L);
+            member.setName("ZZZZZ"); //변경 감지(Dirty Checking)
+
+            System.out.println("===============");
 
             tx.commit(); //em.persist(member) 할때가 아닌 commit 할때 DB에 member(엔티티) 저장됨
         } catch (Exception e){
